@@ -1,5 +1,13 @@
 import { useState } from "react";
 
+export const Title = ({ titre }) => {
+  return (
+    <div>
+      <h1>{titre}</h1>
+    </div>
+  );
+};
+
 export const TodoList = () => {
   const [tasks, setTasks] = useState([
     {

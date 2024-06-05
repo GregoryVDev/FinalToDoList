@@ -1,6 +1,6 @@
 import "./App.css";
 import { Button } from "./components/Button";
-import { Input } from "./components/Input";
+import { Title } from "./components/TodoList";
 
 export const App = () => {
   const handleClick = () => {
@@ -9,6 +9,7 @@ export const App = () => {
 
   return (
     <div>
+      <Title titre="To Do List" />
       <Button
         onClick={handleClick}
         style={{ backgroundColor: "blue", color: "white" }}

@@ -1,6 +1,18 @@
 import "./App.css";
-import { TodoList } from "../components/TodoList";
+import { Button } from "./components/Button";
 
 export const App = () => {
-  return <div></div>;
+  const handleClick = () => {
+    alert("Vous avez cliqué");
+  };
+
+  return (
+    <div>
+      <Button
+        onClick={handleClick}
+        style={{ backgroundColor: "blue", color: "white" }}
+        added="Add"
+      />
+    </div>
+  );
 };

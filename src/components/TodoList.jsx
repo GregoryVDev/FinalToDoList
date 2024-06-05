@@ -9,33 +9,6 @@ export const Title = ({ titre }) => {
 };
 
 export const TodoList = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: "Doctor Appointment",
-      completed: true,
-    },
-    {
-      id: 2,
-      text: "Meeting at School",
-      completed: false,
-    },
-  ]);
-  const [text, setText] = useState("");
+  const [tasks, setTasks] = useState([]); // On créé une variable d'état "tasks" avec un tableau vide. setTasks permet de mettre à jour la liste de tâches
+  const [newTask, setNewTask] = useState(""); // On créé une autre variable newTask avec un useState vide. SetNewTask qui mettra à jour la valeur de NewTask
 
-  const AddTask = (text) => {
-    const newTask = {
-      id: 1,
-      text,
-      completed: false,
-    };
-    setTasks([...tasks, newTask]);
-    setText("");
-  };
-
-  const DeleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
-  };
-
-  const toggleCompleted = (id) => {};
-};

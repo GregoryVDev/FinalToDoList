@@ -9,7 +9,12 @@ export const AddTask = ({ newTask, setNewTask }) => {
   return (
     <div>
       <Button onClick={handlerClickAdd} text="Add Task" />
-      <input type="text" placeholder="Enter your task" value={newTask} />
+      <input
+        type="text"
+        placeholder="Enter your task"
+        value={newTask}
+        onChange={handleChange}
+      />
     </div>
   );
 };

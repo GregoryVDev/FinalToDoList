@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "../components/Button";
 import { AddTask } from "../components/AddTask";
-import { handlerClickDelete, handlerClickEdit } from "../handlers";
 
 export const Title = ({ titre }) => {
   return (
@@ -16,8 +15,8 @@ export const TodoList = () => {
 
   console.log(tasks);
 
-  const deleteTask = (index) => {
-    const newTasks = tasks.filter((task, i) => i !== index); // On filtre les tâches pour créer un tableau sans la tâche à supprimer
+  const deleteTask = (remove) => {
+    const newTasks = tasks.filter((task, i) => i !== remove); // On filtre les tâches pour créer un tableau sans la tâche à supprimer
     setTasks(newTasks); // Met à jour l'état des tâches avec ce nouveau tableau stocké dans la const newTasks
   };
 
@@ -25,8 +24,14 @@ export const TodoList = () => {
     <div>
       <Title titre="To Do List" />
       <AddTask setTasks={setTasks} />
-      <Button onClick={handlerClickEdit} text="Edit" />
-      <Button onClick={handlerClickDelete} text="Delete" />
+      <ul>
+        {tasks.map((task, remove) => (
+          <li key={remove}>
+            {task}
+            <Button onClick={() => deleteTask(remove)} text="Delete" />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

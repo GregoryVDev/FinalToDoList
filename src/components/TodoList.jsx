@@ -19,4 +19,9 @@ export const TodoList = () => {
       setNewTask(""); // On réinitialise "newTask" en une chaine vide pour pouvoir vider le champ de saisie pour la prochaine task à ajouter
     }
   };
+
+  const deleteTask = (remove) => {
+    const newTasks = tasks.filter((task, i) => i !== remove);
+    setTasks = newTask;
+  };
 };

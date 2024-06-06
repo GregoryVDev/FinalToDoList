@@ -1,7 +1,3 @@
-export const Button = ({ added, style, onClick }) => {
-  return (
-    <button style={style} onClick={onClick}>
-      {added}
-    </button>
-  );
+export const Button = ({ text, onClick }) => {
+  return <button onClick={onClick}>{text}</button>;
 };

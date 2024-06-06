@@ -13,8 +13,10 @@ export const AddTask = ({ setTasks }) => {
       // On vérifie si NewTask ne soit pas vide
       setTasks((prevTasks) => [...prevTasks, newTask]); // Mise à jour de la liste en ajoutant une nouvelle task à la fin du tableau "tasks". "..." est un opérateur de décomposition
       setNewTask(""); // On réinitialise "newTask" en une chaine vide pour pouvoir vider le champ de saisie pour la prochaine task à ajouter
+      console.log("A task has been added");
+    } else {
+      alert("Please you must fill in the field");
     }
-    console.log("Une task a été ajouté");
   };
   return (
     <div>

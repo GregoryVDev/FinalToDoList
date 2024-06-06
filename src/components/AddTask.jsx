@@ -1,7 +1,7 @@
 import { Button } from "./Button";
 import { handlerClickAdd } from "../handlers";
 
-export const AddTask = ({ newTask, setNewTask }) => {
+export const AddTask = ({ newTask, setNewTask, addTask }) => {
   const handleChange = (e) => {
     setNewTask(e.target.value);
   };
@@ -13,7 +13,7 @@ export const AddTask = ({ newTask, setNewTask }) => {
         type="text"
         placeholder="Enter your task"
         value={newTask}
-        onChange={handleChange}
+        onChange={(e) => setNewTask(e.target.value)}
       />
     </div>
   );

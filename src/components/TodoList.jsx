@@ -30,6 +30,7 @@ export const TodoList = () => {
 
   return (
     <div>
+      <Title titre="To Do List" />
       <AddTask newTask={newTask} setNewTask={setNewTask} />
       <Button onClick={handlerClickEdit} text="Edit" />
       <Button onClick={handlerClickDelete} text="Delete" />

@@ -24,4 +24,6 @@ export const TodoList = () => {
     const newTasks = tasks.filter((task, i) => i !== remove);
     setTasks = newTask;
   };
+
+  return <div></div>;
 };

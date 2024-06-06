@@ -13,15 +13,8 @@ export const Title = ({ titre }) => {
 
 export const TodoList = () => {
   const [tasks, setTasks] = useState([]); // On créé une variable d'état "tasks" avec un tableau vide. setTasks permet de mettre à jour la liste de tâches
-  const [newTask, setNewTask] = useState(""); // On créé une autre variable newTask avec un useState vide. SetNewTask qui mettra à jour la valeur de NewTask
 
-  const addTask = () => {
-    if (newTask !== "") {
-      // On vérifie si NewTask ne soit pas vide
-      setTasks([...tasks, newTask]); // Mise à jour de la liste en ajoutant une nouvelle task à la fin du tableau "tasks". "..." est un opérateur de décomposition
-      setNewTask(""); // On réinitialise "newTask" en une chaine vide pour pouvoir vider le champ de saisie pour la prochaine task à ajouter
-    }
-  };
+  console.log(tasks);
 
   const deleteTask = (index) => {
     const newTasks = tasks.filter((task, i) => i !== index); // On filtre les tâches pour créer un tableau sans la tâche à supprimer
@@ -31,7 +24,7 @@ export const TodoList = () => {
   return (
     <div>
       <Title titre="To Do List" />
-      <AddTask newTask={newTask} setNewTask={setNewTask} />
+      <AddTask setTasks={setTasks} />
       <Button onClick={handlerClickEdit} text="Edit" />
       <Button onClick={handlerClickDelete} text="Delete" />
     </div>

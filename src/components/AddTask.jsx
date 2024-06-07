@@ -1,8 +1,6 @@
 import { Button } from "./Button";
 import { useState } from "react";
 
-// import { handlerClickAdd } from "../handlers";
-
 export const AddTask = ({ setTasks }) => {
   const [newTask, setNewTask] = useState(""); // On créé une autre variable newTask avec un useState vide. SetNewTask qui mettra à jour la valeur de NewTask
 
@@ -18,6 +16,14 @@ export const AddTask = ({ setTasks }) => {
       alert("Please you must fill in the field");
     }
   };
+
+  // Permet de faire un event pour que quand on appuie sur "enter" le bouton "handlerClickAdd" soit relié à handleKeyDown
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handlerClickAdd();
+    }
+  };
+
   return (
     <div>
       <input
@@ -25,6 +31,7 @@ export const AddTask = ({ setTasks }) => {
         placeholder="Enter your task"
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
       <Button onClick={handlerClickAdd} text="Add Task" />
     </div>

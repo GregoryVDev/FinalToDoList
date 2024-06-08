@@ -62,13 +62,25 @@ export const TodoList = () => {
                   onChange={(e) => setEditTask(e.target.value)} // if we change the text, we update the new value
                   onKeyDown={handleKeyDown}
                 />
-                <Button onClick={handleClickEdit} text="Save" />
+                <Button
+                  onClick={handleClickEdit}
+                  text="Save"
+                  style={{ backgroundColor: "orange", color: "white" }}
+                />
               </div>
             ) : (
               <div>
                 {task}
-                <Button onClick={() => editTasks(task, index)} text="Edit" />
-                <Button onClick={() => deleteTask(index)} text="Delete" />
+                <Button
+                  onClick={() => editTasks(task, index)}
+                  text="Edit"
+                  style={{ backgroundColor: "green", color: "white" }}
+                />
+                <Button
+                  onClick={() => deleteTask(index)}
+                  text="Delete"
+                  style={{ backgroundColor: "red", color: "white" }}
+                />
               </div>
             )}
           </li>

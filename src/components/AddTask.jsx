@@ -34,7 +34,11 @@ export const AddTask = ({ setTasks }) => {
         onChange={(e) => setNewTask(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <Button onClick={handlerClickAdd} text="Add Task" />
+      <Button
+        onClick={handlerClickAdd}
+        text="Add Task"
+        style={{ backgroundColor: "blue", color: "white" }}
+      />
     </div>
   );
 };

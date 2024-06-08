@@ -1,36 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "../components/Button";
 import { AddTask } from "../components/AddTask";
 
 export const Title = ({ titre }) => {
   return (
-    <div>
+    <div className="title-container">
       <h1>{titre}</h1>
     </div>
   );
 };
 
 export const TodoList = () => {
-  const [tasks, setTasks] = useState([]); // Const tasks with useState empty and update with setTasks
-  // Initiates the index of the current task
+  const [tasks, setTasks] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
-  // Initializes the current task value
   const [editTask, setEditTask] = useState("");
+  const editInputRef = useRef(null);
+
+  useEffect(() => {
+    if (editIndex !== null) {
+      editInputRef.current.focus();
+    }
+  }, [editIndex]);
 
   const editTasks = (updateTask, index) => {
-    setEditTask(updateTask); // Updates the task value
-    setEditIndex(index); //  Updates the task index
+    setEditTask(updateTask);
+    setEditIndex(index);
   };
-
-  console.log(tasks);
 
   const handleClickEdit = () => {
     if (editTask !== "") {
-      const newTasks = [...tasks]; // Creates a copy of the task list
-      newTasks[editIndex] = editTask; // Updates the task just modified in the newTasks array
-      setTasks(newTasks); // Update newTasks on setTasks
-      setEditTask(""); // Resets useState after editing
-      setEditIndex(null); // No task in progress is modified
+      const newTasks = [...tasks];
+      newTasks[editIndex] = editTask;
+      setTasks(newTasks);
+      setEditTask("");
+      setEditIndex(null);
     } else {
       alert("Task cannot be empty!");
     }
@@ -43,23 +46,24 @@ export const TodoList = () => {
   };
 
   const deleteTask = (index) => {
-    const newTasks = tasks.filter((task, i) => i !== index); // Browse each item (task) in the ‘tasks’ list
+    const newTasks = tasks.filter((task, i) => i !== index);
     setTasks(newTasks);
   };
 
   return (
-    <div>
+    <div className="todo-list-container">
       <Title titre="To Do List" />
       <AddTask setTasks={setTasks} />
-      <ul>
+      <ul className="task-list">
         {tasks.map((task, index) => (
-          <li key={index}>
-            {editIndex === index ? ( // editIndex corresponds to the modified task index
-              <div>
+          <li key={index} className="task-item">
+            {editIndex === index ? (
+              <div className="edit-task-container">
                 <input
+                  ref={editInputRef}
                   type="text"
                   value={editTask}
-                  onChange={(e) => setEditTask(e.target.value)} // if we change the text, we update the new value
+                  onChange={(e) => setEditTask(e.target.value)}
                   onKeyDown={handleKeyDown}
                 />
                 <Button
@@ -69,7 +73,7 @@ export const TodoList = () => {
                 />
               </div>
             ) : (
-              <div>
+              <div className="task-item-content">
                 {task}
                 <Button
                   onClick={() => editTasks(task, index)}

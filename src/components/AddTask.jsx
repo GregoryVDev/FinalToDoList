@@ -1,33 +1,35 @@
 import { Button } from "./Button";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const AddTask = ({ setTasks }) => {
-  const [newTask, setNewTask] = useState(""); // Variable NewTasks and setNewTask to update with an empty useState
+  const [newTask, setNewTask] = useState("");
+  const inputRef = useRef(null);
 
-  console.log(newTask);
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const handlerClickAdd = () => {
     if (newTask !== "") {
-      // Check that NewTask is not empty
-      setTasks((prevTasks) => [...prevTasks, newTask]); // Update the prevTasks list with a new task in the table
-      setNewTask(""); // Resets 'newTask' to empty the input for the next task
-      // console.log("A task has been added");
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+      setNewTask("");
+      inputRef.current.focus();
     } else {
       alert("Please you must fill in the field");
     }
   };
 
-  // When you press "enter", it calls handlerClickAdd
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       handlerClickAdd();
-      // console.log("test");
     }
   };
 
   return (
-    <div>
+    <div className="add-task-container">
       <input
+        ref={inputRef}
+        className="task-input"
         type="text"
         placeholder="Enter your task"
         value={newTask}

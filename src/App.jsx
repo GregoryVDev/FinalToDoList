@@ -3,7 +3,7 @@ import { TodoList } from "./components/TodoList";
 
 export const App = () => {
   return (
-    <div>
+    <div className="app-container">
       <TodoList />
     </div>
   );

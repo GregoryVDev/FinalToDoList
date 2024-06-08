@@ -15,6 +15,17 @@ export const TodoList = () => {
   const [editIndex, setEditIndex] = useState(null);
   const [editTask, setEditTask] = useState("");
   const editInputRef = useRef(null);
+  const storageData = localStorage.getItem("tasks");
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  useEffect(() => {
+    if (storageData) {
+      setTasks(JSON.parse(storageData));
+    }
+  }, []);
 
   useEffect(() => {
     if (editIndex !== null) {

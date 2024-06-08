@@ -11,13 +11,40 @@ export const Title = ({ titre }) => {
 };
 
 export const TodoList = () => {
-  const [tasks, setTasks] = useState([]); // On créé une variable d'état "tasks" avec un tableau vide. setTasks permet de mettre à jour la liste de tâches
+  const [tasks, setTasks] = useState([]); // Const tasks with useState empty and update with setTasks
+  // Initiates the index of the current task
+  const [editIndex, setEditIndex] = useState(null);
+  // Initializes the current task value
+  const [editTask, setEditTask] = useState("");
+
+  const editTasks = (updateTask, index) => {
+    setEditTask(updateTask); // Updates the task value
+    setEditIndex(index); //  Updates the task index
+  };
 
   console.log(tasks);
 
-  const deleteTask = (remove) => {
-    const newTasks = tasks.filter((task, i) => i !== remove); // On filtre les tâches pour créer un tableau sans la tâche à supprimer
-    setTasks(newTasks); // Met à jour l'état des tâches avec ce nouveau tableau stocké dans la const newTasks
+  const handleClickEdit = () => {
+    if (editTask !== "") {
+      const newTasks = [...tasks]; // Creates a copy of the task list
+      newTasks[editIndex] = editTask; // Updates the task just modified in the newTasks array
+      setTasks(newTasks); // Update newTasks on setTasks
+      setEditTask(""); // Resets useState after editing
+      setEditIndex(null); // No task in progress is modified
+    } else {
+      alert("Task cannot be empty!");
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleClickEdit();
+    }
+  };
+
+  const deleteTask = (index) => {
+    const newTasks = tasks.filter((task, i) => i !== index); // Browse each item (task) in the ‘tasks’ list
+    setTasks(newTasks);
   };
 
   return (
@@ -25,10 +52,25 @@ export const TodoList = () => {
       <Title titre="To Do List" />
       <AddTask setTasks={setTasks} />
       <ul>
-        {tasks.map((task, remove) => (
-          <li key={remove}>
-            {task}
-            <Button onClick={() => deleteTask(remove)} text="Delete" />
+        {tasks.map((task, index) => (
+          <li key={index}>
+            {editIndex === index ? ( // editIndex corresponds to the modified task index
+              <div>
+                <input
+                  type="text"
+                  value={editTask}
+                  onChange={(e) => setEditTask(e.target.value)} // if we change the text, we update the new value
+                  onKeyDown={handleKeyDown}
+                />
+                <Button onClick={handleClickEdit} text="Save" />
+              </div>
+            ) : (
+              <div>
+                {task}
+                <Button onClick={() => editTasks(task, index)} text="Edit" />
+                <Button onClick={() => deleteTask(index)} text="Delete" />
+              </div>
+            )}
           </li>
         ))}
       </ul>

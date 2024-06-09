@@ -14,24 +14,6 @@ export const TodoList = () => {
   const [tasks, setTasks] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
   const [editTask, setEditTask] = useState("");
-  const editInputRef = useRef(null);
-  const storageData = localStorage.getItem("tasks");
-
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
-
-  useEffect(() => {
-    if (storageData) {
-      setTasks(JSON.parse(storageData));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (editIndex !== null) {
-      editInputRef.current.focus();
-    }
-  }, [editIndex]);
 
   const editTasks = (updateTask, index) => {
     setEditTask(updateTask);
@@ -43,8 +25,8 @@ export const TodoList = () => {
       const newTasks = [...tasks];
       newTasks[editIndex] = editTask;
       setTasks(newTasks);
-      setEditTask("");
-      setEditIndex(null);
+      setEditTask(""); // The useState is emptied once it has been used
+      setEditIndex(null); // null because nothing has been selected for modification
     } else {
       alert("Task cannot be empty!");
     }
@@ -71,7 +53,6 @@ export const TodoList = () => {
             {editIndex === index ? (
               <div className="edit-task-container">
                 <input
-                  ref={editInputRef}
                   type="text"
                   value={editTask}
                   onChange={(e) => setEditTask(e.target.value)}

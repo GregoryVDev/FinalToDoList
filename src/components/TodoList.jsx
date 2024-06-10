@@ -22,7 +22,9 @@ export const TodoList = () => {
 
   const handleClickEdit = () => {
     if (editTask !== "") {
+      // creates a copy of the tasks array and assigns it to newTasks
       const newTasks = [...tasks];
+      // Updates the element at index "editIndex" in "newTasks" to be equal to "editTask".
       newTasks[editIndex] = editTask;
       setTasks(newTasks);
       setEditTask(""); // The useState is emptied once it has been used
@@ -38,8 +40,11 @@ export const TodoList = () => {
     }
   };
 
+  // Create deleteTaks with the "index" parameter
   const deleteTask = (index) => {
+    // Recreates an array with all the elements that match the condition and only elements with an "i" other than index will be included in this newTasks array
     const newTasks = tasks.filter((task, i) => i !== index);
+    // Update the new table in "setTasks"
     setTasks(newTasks);
   };
 

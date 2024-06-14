@@ -25,7 +25,7 @@ export const TodoList = () => {
       // creates a copy of the tasks array and assigns it to newTasks
       const newTasks = [...tasks];
       // Updates the element at index "editIndex" in "newTasks" to be equal to "editTask".
-      newTasks[editIndex] = editTask;
+      newTasks[editIndex] = editTask; // Update newTask to the editIndex so that it is equal to editTask
       setTasks(newTasks);
       setEditTask(""); // The useState is emptied once it has been used
       setEditIndex(null); // null because nothing has been selected for modification
